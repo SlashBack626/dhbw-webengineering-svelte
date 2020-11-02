@@ -57,6 +57,10 @@
       // section.scrollBy({ top: navHeight, behavior: "smooth" });
     }
   }
+
+  function closePopup(event: MouseEvent) {
+    showServices = false;
+  }
 </script>
 
 <style>
@@ -67,6 +71,16 @@
     width: 100%;
     height: 100%;
     backdrop-filter: blur(5px);
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  img {
+    align-self: flex-end;
+    margin: 1em;
+    width: 50px;
+    filter: invert(100%) sepia(9%) saturate(1719%) hue-rotate(343deg)
+      brightness(109%) contrast(109%);
   }
 </style>
 
@@ -90,6 +104,7 @@
 </main>
 {#if showServices}
   <div id="popupRoot">
+    <img src="./assets/close.svg" alt="close" on:click={closePopup} />
     <ServiceMenu />
   </div>
 {/if}
