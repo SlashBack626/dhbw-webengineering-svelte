@@ -2,8 +2,8 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "rollup -c && tsc --build ./server/tsconfig.json",
+    "dev": "rollup -c -w && tsc --build ./server/tsconfig.json",
     "start": "sirv public",
     "validate": "svelte-check"
   },

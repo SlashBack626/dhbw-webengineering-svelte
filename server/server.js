@@ -10,6 +10,6 @@ app.get("/wikisearch/:search", (req, res) => {
     console.log(req.params.search);
     res.send();
 });
-app.listen(3000, () => {
-    console.log("Server started");
+app.listen(process.env.PORT, () => {
+    console.log(`Server started on PORT ${process.env.PORT}`);
 });
