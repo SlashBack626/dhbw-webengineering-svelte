@@ -1,5 +1,13 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   export let title: string;
+
+  const dispatch = createEventDispatcher();
+
+  function forward(event: string) {
+    dispatch("navClick", event);
+  }
 </script>
 
 <style>
@@ -54,25 +62,37 @@
     }
   }
 
+  @media (max-width: 373px) {
+    img {
+      width: 100%;
+    }
+    h1 {
+      font-size: 20px;
+    }
+  }
+
   li {
     width: 100%;
     padding: 1em;
     text-align: center;
     color: white;
   }
+  li:hover {
+    background-color: green;
+  }
 </style>
 
 <header>
   <div>
-    <img src="./assets/logodhbw.svg" alt="" />
+    <img src="./assets/logodhbw.svg" alt="DHBW Logo" />
     <h1>{title}</h1>
   </div>
 </header>
 <nav>
   <ul>
-    <li>Informatik</li>
-    <li>Elektrotechnik</li>
-    <li>Maschinenbau</li>
-    <li>Services</li>
+    <li on:click={() => forward('informatik')}>Informatik</li>
+    <li on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
+    <li on:click={() => forward('maschinenbau')}>Maschinenbau</li>
+    <li on:click={() => forward('services')}>Services</li>
   </ul>
 </nav>

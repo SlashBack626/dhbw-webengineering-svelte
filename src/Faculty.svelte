@@ -2,6 +2,7 @@
   export let name: string;
   export let img: string;
   export let description: string;
+  export let id: string;
 </script>
 
 <style>
@@ -39,7 +40,7 @@
   }
 </style>
 
-<section>
+<section {id}>
   <div class="title">
     <h2>{name}</h2>
   </div>

@@ -2,9 +2,8 @@
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
-
-  export let name: string;
-
+  import ServiceMenu from "./ServiceMenu.svelte";
+  let navHeight;
   const descriptions = {
     informatik: `
 	Informatiker übertragen Vorgänge der realen Welt auf
@@ -42,21 +41,56 @@
     maschinenbau:
       "https://cdn.pixabay.com/photo/2016/03/04/19/36/gears-1236578_960_720.jpg",
   };
+
+  let showServices = false;
+
+  function onNavClick(
+    event: CustomEvent<
+      "informatik" | "elektrotechnik" | "maschinenbau" | "services"
+    >
+  ) {
+    if (event.detail === "services") {
+      showServices = true;
+    } else {
+      let section = document.getElementById(event.detail);
+      section.scrollIntoView({ behavior: "smooth" });
+      // section.scrollBy({ top: navHeight, behavior: "smooth" });
+    }
+  }
 </script>
 
-<Header title="DHBW WebEngineering" />
+<style>
+  #popupRoot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+  }
+</style>
+
+<Header title="DHBW WebEngineering" on:navClick={onNavClick} />
 <main>
   <Faculty
+    id="informatik"
     name="Informatik"
     description={descriptions.informatik}
     img={imgs.informatik} />
   <Faculty
+    id="elektrotechnik"
     name="Elektrotechnik"
     description={descriptions.elektrotechnik}
     img={imgs.elektrotechnik} />
   <Faculty
+    id="maschinenbau"
     name="Maschinenbau"
     description={descriptions.maschinenbau}
     img={imgs.maschinenbau} />
 </main>
+{#if showServices}
+  <div id="popupRoot">
+    <ServiceMenu />
+  </div>
+{/if}
 <Footer />
