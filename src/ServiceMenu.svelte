@@ -15,6 +15,7 @@
 
 <style>
   #popup {
+    min-height: 74px;
     background-color: #28272c;
     color: white;
     border-radius: 5px;

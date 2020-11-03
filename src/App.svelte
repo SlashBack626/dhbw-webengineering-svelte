@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Chat from "./Chat.svelte";
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
@@ -75,6 +76,7 @@
     backdrop-filter: blur(5px);
     display: flex;
     flex-flow: column nowrap;
+    overflow-y: auto;
   }
 
   img {
@@ -108,6 +110,7 @@
   <div id="popupRoot">
     <img src="./assets/close.svg" alt="close" on:click={closePopup} />
     <ServiceMenu />
+    <Chat />
   </div>
 {/if}
 <Footer />
