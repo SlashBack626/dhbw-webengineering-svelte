@@ -1,5 +1,20 @@
 <script lang="ts">
+  import type { MessageData } from "./Interfaces";
+
   import Message from "./Message.svelte";
+
+  let username: string;
+  let group: string = "GlobalChat";
+  let msgText: string;
+  let msgs: MessageData[] = [];
+
+  function sendMessage() {
+    if (!msgText || msgText.length === 0 || !username || username.length === 0)
+      return;
+    msgs.unshift({ username: username, me: true, content: msgText });
+    msgs = msgs;
+    msgText = "";
+  }
 </script>
 
 <style>
@@ -75,16 +90,24 @@
   <h2>Chat</h2>
   <div id="chat">
     <div id="msgInputBox">
-      <input type="text" id="msgInput" />
-      <button>Send</button>
+      <input
+        type="text"
+        id="msgInput"
+        bind:value={msgText}
+        on:keydown={(e) => {
+          if (e.key === 'Enter') sendMessage();
+        }} />
+      <button on:click={sendMessage}>Send</button>
     </div>
-    <Message username="SlashBack" me content="dummy message" />
+    {#each msgs as msg}
+      <Message {...msg} />
+    {/each}
   </div>
   <div id="settings">
     <label for="Username">Username</label>
-    <input type="text" id="Username" />
+    <input type="text" id="Username" bind:value={username} />
     <label for="Group">Group</label>
-    <input type="text" id="Group" />
+    <input type="text" id="Group" bind:value={group} />
     <button>Apply</button>
   </div>
 </div>

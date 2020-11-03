@@ -3,7 +3,7 @@
   import type { WikiSearch, WikiSearchResultPage } from "./Interfaces";
   let searchText: string;
   let results: WikiSearchResultPage[] = null;
-  async function search(e: MouseEvent) {
+  async function search() {
     if (searchText.length === 0) return;
     let res = await axios.get<WikiSearch>(`/wikisearch/${searchText}`);
     res.data.results.forEach((page) => {
@@ -15,14 +15,17 @@
 
 <style>
   #popup {
-    min-height: 74px;
+    min-height: 80px;
+    height: auto;
     background-color: #28272c;
     color: white;
     border-radius: 5px;
     margin: 1em;
     padding: 1em;
     border: 1px solid #1e1324;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-shrink: 0;
   }
 
   input {
@@ -46,7 +49,10 @@
     text-align: justify;
   }
 
-  td:first {
+  tr td:first-child,
+  tr td:nth-child(2) {
+    justify-content: center;
+    align-items: center;
     text-align: center;
   }
 
@@ -61,7 +67,12 @@
 <div id="popup">
   <span>Wikipedia search:</span>
   <div>
-    <input type="text" bind:value={searchText} />
+    <input
+      type="text"
+      bind:value={searchText}
+      on:keydown={(e) => {
+        if (e.key === 'Enter') search();
+      }} />
     <button on:click={search}>go</button>
     {#if results}
       <table>

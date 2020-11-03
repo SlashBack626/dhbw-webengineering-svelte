@@ -11,4 +11,10 @@ interface WikiSearchResultPage {
 interface WikiSearch {
   results: WikiSearchResultPage[];
 }
-export type { WikiSearchResultPage, WikiSearch };
+
+interface MessageData {
+  username: string;
+  me: boolean;
+  content: string;
+}
+export type { WikiSearchResultPage, WikiSearch, MessageData };
