@@ -51,6 +51,7 @@
   ) {
     if (event.detail === "services") {
       showServices = true;
+      document.body.style.overflow = "hidden";
     } else {
       let section = document.getElementById(event.detail);
       section.scrollIntoView({ behavior: "smooth" });
@@ -60,6 +61,7 @@
 
   function closePopup(event: MouseEvent) {
     showServices = false;
+    document.body.style.overflow = "auto";
   }
 </script>
 
