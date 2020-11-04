@@ -8,6 +8,7 @@
   .msg {
     overflow: hidden;
     max-width: 80%;
+    flex-shrink: 0;
   }
 
   .msgBody {
@@ -18,6 +19,7 @@
     margin-top: 0;
     text-align: justify;
     width: fit-content;
+    overflow-wrap: break-word;
   }
 
   .received {

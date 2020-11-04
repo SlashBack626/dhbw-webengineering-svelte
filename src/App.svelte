@@ -3,7 +3,7 @@
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
-  import ServiceMenu from "./ServiceMenu.svelte";
+  import WikiSearch from "./WikiSearch.svelte";
   let navHeight;
   const descriptions = {
     informatik: `
@@ -116,7 +116,7 @@
 {#if showServices}
   <div id="popupRoot">
     <img src="./assets/close.svg" alt="close" on:click={closePopup} />
-    <ServiceMenu />
+    <WikiSearch />
     <Chat />
     <div id="test" />
   </div>

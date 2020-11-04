@@ -14,7 +14,25 @@ interface WikiSearch {
 
 interface MessageData {
   username: string;
-  me: boolean;
   content: string;
+  timestamp: Date;
+  room: string;
 }
-export type { WikiSearchResultPage, WikiSearch, MessageData };
+
+interface RawMessage {
+  Owner: string;
+  Group: string;
+  Time: string;
+  Text: string;
+}
+
+interface UserMessage extends MessageData {
+  me: boolean;
+}
+export type {
+  WikiSearchResultPage,
+  WikiSearch,
+  MessageData,
+  RawMessage,
+  UserMessage,
+};

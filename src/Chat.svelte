@@ -1,17 +1,54 @@
 <script lang="ts">
-  import type { MessageData } from "./Interfaces";
+  import type { MessageData, RawMessage, UserMessage } from "./Interfaces";
 
   import Message from "./Message.svelte";
+  import io from "socket.io-client";
+
+  const socket = io();
 
   let username: string;
   let group: string = "GlobalChat";
   let msgText: string;
-  let msgs: MessageData[] = [];
+  let msgs: UserMessage[] = [];
+
+  socket.on("load", (loaded: RawMessage[]) => {
+    console.log(loaded);
+    msgs = msgs.concat(
+      loaded
+        .map((msg) => {
+          return {
+            content: msg.Text,
+            room: msg.Group,
+            username: msg.Owner,
+            timestamp: new Date(msg.Time),
+            me: msg.Owner === username,
+          };
+        })
+        .reverse()
+    );
+  });
+
+  socket.emit("join", group);
+
+  socket.on("msg", (msg: MessageData) => {
+    console.log(msg);
+    msgs.unshift({ ...msg, me: false });
+    msgs = msgs;
+  });
 
   function sendMessage() {
     if (!msgText || msgText.length === 0 || !username || username.length === 0)
       return;
-    msgs.unshift({ username: username, me: true, content: msgText });
+
+    const date = new Date();
+    const msg: MessageData = {
+      username: username,
+      content: msgText,
+      room: group,
+      timestamp: date,
+    };
+    msgs.unshift({ ...msg, me: true });
+    socket.emit("msg", msg);
     msgs = msgs;
     msgText = "";
   }
@@ -45,6 +82,7 @@
     overflow-y: auto;
     display: flex;
     flex-flow: column-reverse nowrap;
+    overflow-y: auto;
   }
 
   #settings {
@@ -106,8 +144,8 @@
   <div id="settings">
     <label for="Username">Username</label>
     <input type="text" id="Username" bind:value={username} />
-    <label for="Group">Group</label>
+    <!-- <label for="Group">Group</label>
     <input type="text" id="Group" bind:value={group} />
-    <button>Apply</button>
+    <button>Apply</button> -->
   </div>
 </div>

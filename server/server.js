@@ -5,7 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const express_1 = __importDefault(require("express"));
+const socket_io_1 = __importDefault(require("socket.io"));
+const http_1 = __importDefault(require("http"));
 const app = express_1.default();
+const server = http_1.default.createServer(app);
+const io = socket_io_1.default(server);
 app.use(express_1.default.static("public"));
 app.get("/wikisearch/:search", async (req, res) => {
     console.log(req.params.search);
@@ -27,6 +31,37 @@ app.get("/wikisearch/:search", async (req, res) => {
     else
         res.send();
 });
-app.listen(process.env.PORT, () => {
+io.on("connection", (socket) => {
+    console.log("someone connected");
+    const rooms = [];
+    socket.on("join", async (room) => {
+        if (rooms.findIndex((val) => val === room) !== -1)
+            return;
+        rooms.push(room);
+        socket.join(room);
+        const res = await axios_1.default.post("https://juergenschneider.eu-gb.mybluemix.net/chat", {
+            cmd: "getAll",
+            Group: room,
+        });
+        socket.emit("load", res.data.Data);
+    });
+    socket.on("leave", (room) => {
+        socket.leave(room);
+        const index = rooms.findIndex((val) => val === room);
+        if (index !== -1) {
+            rooms.splice(index, 1);
+        }
+    });
+    socket.on("msg", (msg) => {
+        socket.to(msg.room).emit("msg", msg);
+        axios_1.default.post("https://juergenschneider.eu-gb.mybluemix.net/chat", {
+            cmd: "append",
+            Group: msg.room,
+            Owner: msg.username,
+            Text: msg.content,
+        });
+    });
+});
+server.listen(process.env.PORT, () => {
     console.log(`Server started on PORT ${process.env.PORT}`);
 });
