@@ -1,5 +1,6 @@
 <script lang="ts">
   import Chat from "./Chat.svelte";
+  import ChatSelection from "./ChatSelection.svelte";
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
@@ -117,7 +118,8 @@
   <div id="popupRoot">
     <img src="./assets/close.svg" alt="close" on:click={closePopup} />
     <WikiSearch />
-    <Chat />
+    <ChatSelection />
+    <!-- <Chat group="GlobalChat" username="SlashBack" /> -->
     <div id="test" />
   </div>
 {/if}

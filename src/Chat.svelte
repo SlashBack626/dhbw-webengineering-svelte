@@ -5,13 +5,14 @@
   import io from "socket.io-client";
 
   const socket = io();
+  export let username: string;
+  export let group: string = "GlobalChat";
 
-  let username: string;
-  let group: string = "GlobalChat";
   let msgText: string;
   let msgs: UserMessage[] = [];
 
-  socket.on("load", (loaded: RawMessage[]) => {
+  console.log(group);
+  socket.once("load", (loaded: RawMessage[]) => {
     console.log(loaded);
     msgs = msgs.concat(
       loaded
@@ -55,27 +56,9 @@
 </script>
 
 <style>
-  #chatWindow {
-    /* width: 100%; */
-    display: flex;
-    flex-flow: column nowrap;
-    /* align-items: stretch;
-    justify-content: stretch; */
-    height: 80vh;
-    margin: 1em;
-    /* border: 8px solid #204161; */
-    border: 1px solid #1e1324;
-    background-color: #28272c;
-    border-radius: 5px;
-    color: white;
-  }
-  h2 {
-    margin: 10px;
-    margin-left: 20px;
-  }
-
   #chat {
     margin: 1em;
+    margin-top: 0;
     height: 100%;
     background-color: #061625;
     border-radius: 5px;
@@ -85,16 +68,13 @@
     overflow-y: auto;
   }
 
-  #settings {
-    margin: 1em;
-  }
-
   input {
     background-color: #061625;
     color: white;
   }
-  button {
+  #send {
     background-color: yellowgreen;
+    margin: 1em;
   }
 
   #msgInputBox {
@@ -118,34 +98,22 @@
     border: none;
     outline: none;
   }
-
-  button {
-    margin: 1em;
-  }
 </style>
 
-<div id="chatWindow">
-  <h2>Chat</h2>
-  <div id="chat">
-    <div id="msgInputBox">
-      <input
-        type="text"
-        id="msgInput"
-        bind:value={msgText}
-        on:keydown={(e) => {
-          if (e.key === 'Enter') sendMessage();
-        }} />
-      <button on:click={sendMessage}>Send</button>
-    </div>
-    {#each msgs as msg}
-      <Message {...msg} />
-    {/each}
+<div id="chat">
+  <div id="msgInputBox">
+    <input
+      type="text"
+      id="msgInput"
+      autocomplete="off"
+      bind:value={msgText}
+      on:keydown={(e) => {
+        if (e.key === 'Enter') sendMessage();
+      }} />
+
+    <button id="send" on:click={sendMessage}>Send</button>
   </div>
-  <div id="settings">
-    <label for="Username">Username</label>
-    <input type="text" id="Username" bind:value={username} />
-    <!-- <label for="Group">Group</label>
-    <input type="text" id="Group" bind:value={group} />
-    <button>Apply</button> -->
-  </div>
+  {#each msgs as msg}
+    <Message {...msg} />
+  {/each}
 </div>
