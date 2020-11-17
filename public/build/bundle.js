@@ -32278,7 +32278,7 @@ var app = (function () {
     	return block;
     }
 
-    // (289:2) {:then data}
+    // (294:2) {:then data}
     function create_then_block_1(ctx) {
     	let div;
     	let h1;
@@ -32300,15 +32300,15 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "GO";
     			attr_dev(h1, "class", "svelte-rkvaqi");
-    			add_location(h1, file$6, 290, 6, 8934);
+    			add_location(h1, file$6, 295, 6, 9037);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "svelte-rkvaqi");
-    			add_location(input, file$6, 291, 6, 8961);
+    			add_location(input, file$6, 296, 6, 9064);
     			attr_dev(button, "class", "svelte-rkvaqi");
-    			add_location(button, file$6, 300, 6, 9183);
+    			add_location(button, file$6, 305, 6, 9286);
     			attr_dev(div, "id", "top");
     			attr_dev(div, "class", "svelte-rkvaqi");
-    			add_location(div, file$6, 289, 4, 8912);
+    			add_location(div, file$6, 294, 4, 9015);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -32345,14 +32345,14 @@ var app = (function () {
     		block,
     		id: create_then_block_1.name,
     		type: "then",
-    		source: "(289:2) {:then data}",
+    		source: "(294:2) {:then data}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (287:15)       <h1>loading</h1>    {:then data}
+    // (292:15)       <h1>loading</h1>    {:then data}
     function create_pending_block_1(ctx) {
     	let h1;
 
@@ -32361,7 +32361,7 @@ var app = (function () {
     			h1 = element("h1");
     			h1.textContent = "loading";
     			attr_dev(h1, "class", "svelte-rkvaqi");
-    			add_location(h1, file$6, 287, 4, 8874);
+    			add_location(h1, file$6, 292, 4, 8977);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -32376,7 +32376,7 @@ var app = (function () {
     		block,
     		id: create_pending_block_1.name,
     		type: "pending",
-    		source: "(287:15)       <h1>loading</h1>    {:then data}",
+    		source: "(292:15)       <h1>loading</h1>    {:then data}",
     		ctx
     	});
 
@@ -32398,7 +32398,7 @@ var app = (function () {
     	return block;
     }
 
-    // (313:6) {:then data}
+    // (318:6) {:then data}
     function create_then_block(ctx) {
     	let div4;
     	let div0;
@@ -32515,52 +32515,52 @@ var app = (function () {
     			t30 = text(" %");
     			attr_dev(label0, "for", "");
     			attr_dev(label0, "class", "svelte-rkvaqi");
-    			add_location(label0, file$6, 315, 12, 9529);
-    			add_location(span0, file$6, 316, 12, 9574);
+    			add_location(label0, file$6, 320, 12, 9632);
+    			add_location(span0, file$6, 321, 12, 9677);
     			attr_dev(div0, "class", "item svelte-rkvaqi");
-    			add_location(div0, file$6, 314, 10, 9497);
+    			add_location(div0, file$6, 319, 10, 9600);
     			attr_dev(label1, "for", "");
     			attr_dev(label1, "class", "svelte-rkvaqi");
-    			add_location(label1, file$6, 319, 12, 9677);
-    			add_location(span1, file$6, 320, 12, 9727);
+    			add_location(label1, file$6, 324, 12, 9780);
+    			add_location(span1, file$6, 325, 12, 9830);
     			attr_dev(div1, "class", "item svelte-rkvaqi");
-    			add_location(div1, file$6, 318, 10, 9645);
+    			add_location(div1, file$6, 323, 10, 9748);
     			attr_dev(label2, "for", "");
     			attr_dev(label2, "class", "svelte-rkvaqi");
-    			add_location(label2, file$6, 323, 12, 9825);
-    			add_location(span2, file$6, 324, 12, 9870);
+    			add_location(label2, file$6, 328, 12, 9928);
+    			add_location(span2, file$6, 329, 12, 9973);
     			attr_dev(div2, "class", "item svelte-rkvaqi");
-    			add_location(div2, file$6, 322, 10, 9793);
+    			add_location(div2, file$6, 327, 10, 9896);
     			attr_dev(label3, "for", "");
     			attr_dev(label3, "class", "svelte-rkvaqi");
-    			add_location(label3, file$6, 327, 12, 9974);
-    			add_location(span3, file$6, 328, 12, 10016);
+    			add_location(label3, file$6, 332, 12, 10077);
+    			add_location(span3, file$6, 333, 12, 10119);
     			attr_dev(div3, "class", "item svelte-rkvaqi");
-    			add_location(div3, file$6, 326, 10, 9942);
+    			add_location(div3, file$6, 331, 10, 10045);
     			attr_dev(div4, "class", "info svelte-rkvaqi");
-    			add_location(div4, file$6, 313, 8, 9467);
+    			add_location(div4, file$6, 318, 8, 9570);
     			if (img.src !== (img_src_value = /*data*/ ctx[13].current.condition.icon)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", "svelte-rkvaqi");
-    			add_location(img, file$6, 334, 12, 10213);
+    			add_location(img, file$6, 339, 12, 10316);
     			set_style(span4, "display", "block");
-    			add_location(span4, file$6, 335, 12, 10275);
+    			add_location(span4, file$6, 340, 12, 10378);
     			attr_dev(div5, "class", "item svelte-rkvaqi");
-    			add_location(div5, file$6, 332, 10, 10127);
+    			add_location(div5, file$6, 337, 10, 10230);
     			attr_dev(label4, "for", "");
     			attr_dev(label4, "class", "svelte-rkvaqi");
-    			add_location(label4, file$6, 338, 12, 10401);
-    			add_location(span5, file$6, 339, 12, 10445);
+    			add_location(label4, file$6, 343, 12, 10504);
+    			add_location(span5, file$6, 344, 12, 10548);
     			attr_dev(div6, "class", "item svelte-rkvaqi");
-    			add_location(div6, file$6, 337, 10, 10369);
+    			add_location(div6, file$6, 342, 10, 10472);
     			attr_dev(label5, "for", "");
     			attr_dev(label5, "class", "svelte-rkvaqi");
-    			add_location(label5, file$6, 342, 12, 10545);
-    			add_location(span6, file$6, 343, 12, 10592);
+    			add_location(label5, file$6, 347, 12, 10648);
+    			add_location(span6, file$6, 348, 12, 10695);
     			attr_dev(div7, "class", "item svelte-rkvaqi");
-    			add_location(div7, file$6, 341, 10, 10513);
+    			add_location(div7, file$6, 346, 10, 10616);
     			attr_dev(div8, "class", "info svelte-rkvaqi");
-    			add_location(div8, file$6, 331, 8, 10097);
+    			add_location(div8, file$6, 336, 8, 10200);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -32637,14 +32637,14 @@ var app = (function () {
     		block,
     		id: create_then_block.name,
     		type: "then",
-    		source: "(313:6) {:then data}",
+    		source: "(318:6) {:then data}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (311:19)           <h2>loading</h2>        {:then data}
+    // (316:19)           <h2>loading</h2>        {:then data}
     function create_pending_block(ctx) {
     	let h2;
 
@@ -32652,7 +32652,7 @@ var app = (function () {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "loading";
-    			add_location(h2, file$6, 311, 8, 9421);
+    			add_location(h2, file$6, 316, 8, 9524);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -32667,7 +32667,7 @@ var app = (function () {
     		block,
     		id: create_pending_block.name,
     		type: "pending",
-    		source: "(311:19)           <h2>loading</h2>        {:then data}",
+    		source: "(316:19)           <h2>loading</h2>        {:then data}",
     		ctx
     	});
 
@@ -32722,14 +32722,14 @@ var app = (function () {
     			info_1.block.c();
     			attr_dev(canvas, "id", "chart");
     			attr_dev(canvas, "class", "svelte-rkvaqi");
-    			add_location(canvas, file$6, 308, 4, 9358);
-    			add_location(div0, file$6, 309, 4, 9385);
+    			add_location(canvas, file$6, 313, 4, 9461);
+    			add_location(div0, file$6, 314, 4, 9488);
     			attr_dev(div1, "id", "data");
     			attr_dev(div1, "class", "svelte-rkvaqi");
-    			add_location(div1, file$6, 307, 2, 9337);
+    			add_location(div1, file$6, 312, 2, 9440);
     			attr_dev(div2, "id", "widget");
     			attr_dev(div2, "class", "svelte-rkvaqi");
-    			add_location(div2, file$6, 285, 0, 8834);
+    			add_location(div2, file$6, 290, 0, 8937);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -32982,8 +32982,12 @@ var app = (function () {
 
     	function ip() {
     		return __awaiter(this, void 0, void 0, function* () {
-    			const data = yield axios$1.get(`/weather/ip`);
-    			return data.data.location.name;
+    			try {
+    				const data = yield axios$1.get(`/weather/ip`);
+    				return data.data.location.name;
+    			} catch(error) {
+    				return "Stuttgart";
+    			}
     		});
     	}
 

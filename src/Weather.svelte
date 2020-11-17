@@ -172,8 +172,12 @@
   let test = getCurrent("Stuttgart");
 
   async function ip() {
-    const data = await Axios.get<Weather.CurrentResponse>(`/weather/ip`);
-    return data.data.location.name;
+    try {
+      const data = await Axios.get<Weather.CurrentResponse>(`/weather/ip`);
+      return data.data.location.name;
+    } catch (error) {
+      return "Stuttgart";
+    }
   }
 
   onMount(async () => {
