@@ -3,7 +3,7 @@ import express from "express";
 import socketIO from "socket.io";
 import http from "http";
 import { Message, GetAllResponse, MessageData, Weather } from "./interfaces";
-
+import publicIP from "public-ip";
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -33,11 +33,19 @@ app.get("/wikisearch/:search", async (req, res) => {
 });
 
 app.get("/weather/ip", async (req, res) => {
-  console.log(req.connection.remoteAddress);
+  console.log(req.ip);
+  let { ip } = req;
+  if (ip.substr(0, 7) === "::ffff:") {
+    ip = ip.substring(7);
+  }
+  if (ip.match(/(127\.0\.0\.1)|(::1)/)) {
+    ip = process.env.IPV4 as string;
+  }
+  console.log(ip);
   const { remoteAddress } = req.connection;
   try {
     const weather = await Axios.get<Weather.ForecastResponse>(
-      `https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${remoteAddress}`
+      `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${ip}`
     );
 
     res.send(weather.data);
@@ -103,6 +111,11 @@ io.on("connection", (socket) => {
     });
   });
 });
-server.listen(process.env.PORT, () => {
-  console.log(`Server started on PORT ${process.env.PORT}`);
+
+publicIP.v4().then((ip) => {
+  process.env.IPV4 = ip;
+  console.log(process.env.IPV4);
+  server.listen(process.env.PORT, () => {
+    console.log(`Server started on PORT ${process.env.PORT}`);
+  });
 });

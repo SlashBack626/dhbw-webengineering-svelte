@@ -32264,6 +32264,126 @@ var app = (function () {
     const file$6 = "src\\Weather.svelte";
 
     // (1:0) <script lang="ts">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {      function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }
+    function create_catch_block_1(ctx) {
+    	const block = { c: noop, m: noop, p: noop, d: noop };
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_catch_block_1.name,
+    		type: "catch",
+    		source: "(1:0) <script lang=\\\"ts\\\">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {      function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (289:2) {:then data}
+    function create_then_block_1(ctx) {
+    	let div;
+    	let h1;
+    	let t1;
+    	let input;
+    	let t2;
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Weather in";
+    			t1 = space();
+    			input = element("input");
+    			t2 = space();
+    			button = element("button");
+    			button.textContent = "GO";
+    			attr_dev(h1, "class", "svelte-rkvaqi");
+    			add_location(h1, file$6, 290, 6, 8934);
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "class", "svelte-rkvaqi");
+    			add_location(input, file$6, 291, 6, 8961);
+    			attr_dev(button, "class", "svelte-rkvaqi");
+    			add_location(button, file$6, 300, 6, 9183);
+    			attr_dev(div, "id", "top");
+    			attr_dev(div, "class", "svelte-rkvaqi");
+    			add_location(div, file$6, 289, 4, 8912);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, h1);
+    			append_dev(div, t1);
+    			append_dev(div, input);
+    			set_input_value(input, /*city*/ ctx[0]);
+    			append_dev(div, t2);
+    			append_dev(div, button);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[4]),
+    					listen_dev(input, "keydown", /*keydown_handler*/ ctx[5], false, false, false),
+    					listen_dev(button, "click", /*click_handler*/ ctx[6], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*city*/ 1 && input.value !== /*city*/ ctx[0]) {
+    				set_input_value(input, /*city*/ ctx[0]);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_then_block_1.name,
+    		type: "then",
+    		source: "(289:2) {:then data}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (287:15)       <h1>loading</h1>    {:then data}
+    function create_pending_block_1(ctx) {
+    	let h1;
+
+    	const block = {
+    		c: function create() {
+    			h1 = element("h1");
+    			h1.textContent = "loading";
+    			attr_dev(h1, "class", "svelte-rkvaqi");
+    			add_location(h1, file$6, 287, 4, 8874);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h1, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_pending_block_1.name,
+    		type: "pending",
+    		source: "(287:15)       <h1>loading</h1>    {:then data}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (1:0) <script lang="ts">var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {      function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }
     function create_catch_block(ctx) {
     	const block = { c: noop, m: noop, p: noop, d: noop };
 
@@ -32278,14 +32398,14 @@ var app = (function () {
     	return block;
     }
 
-    // (241:6) {:then data}
+    // (313:6) {:then data}
     function create_then_block(ctx) {
     	let div4;
     	let div0;
     	let label0;
     	let t1;
     	let span0;
-    	let t2_value = /*data*/ ctx[6].current.wind_kph + "";
+    	let t2_value = /*data*/ ctx[13].current.wind_kph + "";
     	let t2;
     	let t3;
     	let t4;
@@ -32293,14 +32413,14 @@ var app = (function () {
     	let label1;
     	let t6;
     	let span1;
-    	let t7_value = /*data*/ ctx[6].current.wind_dir + "";
+    	let t7_value = /*data*/ ctx[13].current.wind_dir + "";
     	let t7;
     	let t8;
     	let div2;
     	let label2;
     	let t10;
     	let span2;
-    	let t11_value = /*data*/ ctx[6].current.feelslike_c + "";
+    	let t11_value = /*data*/ ctx[13].current.feelslike_c + "";
     	let t11;
     	let t12;
     	let t13;
@@ -32308,7 +32428,7 @@ var app = (function () {
     	let label3;
     	let t15;
     	let span3;
-    	let t16_value = /*data*/ ctx[6].current.temp_c + "";
+    	let t16_value = /*data*/ ctx[13].current.temp_c + "";
     	let t16;
     	let t17;
     	let t18;
@@ -32318,14 +32438,14 @@ var app = (function () {
     	let img_src_value;
     	let t19;
     	let span4;
-    	let t20_value = /*data*/ ctx[6].current.condition.text + "";
+    	let t20_value = /*data*/ ctx[13].current.condition.text + "";
     	let t20;
     	let t21;
     	let div6;
     	let label4;
     	let t23;
     	let span5;
-    	let t24_value = /*data*/ ctx[6].current.humidity + "";
+    	let t24_value = /*data*/ ctx[13].current.humidity + "";
     	let t24;
     	let t25;
     	let t26;
@@ -32333,7 +32453,7 @@ var app = (function () {
     	let label5;
     	let t28;
     	let span6;
-    	let t29_value = /*data*/ ctx[6].current.cloud + "";
+    	let t29_value = /*data*/ ctx[13].current.cloud + "";
     	let t29;
     	let t30;
 
@@ -32394,53 +32514,53 @@ var app = (function () {
     			t29 = text(t29_value);
     			t30 = text(" %");
     			attr_dev(label0, "for", "");
-    			attr_dev(label0, "class", "svelte-1c48nfv");
-    			add_location(label0, file$6, 243, 12, 7644);
-    			add_location(span0, file$6, 244, 12, 7689);
-    			attr_dev(div0, "class", "item svelte-1c48nfv");
-    			add_location(div0, file$6, 242, 10, 7612);
+    			attr_dev(label0, "class", "svelte-rkvaqi");
+    			add_location(label0, file$6, 315, 12, 9529);
+    			add_location(span0, file$6, 316, 12, 9574);
+    			attr_dev(div0, "class", "item svelte-rkvaqi");
+    			add_location(div0, file$6, 314, 10, 9497);
     			attr_dev(label1, "for", "");
-    			attr_dev(label1, "class", "svelte-1c48nfv");
-    			add_location(label1, file$6, 247, 12, 7792);
-    			add_location(span1, file$6, 248, 12, 7842);
-    			attr_dev(div1, "class", "item svelte-1c48nfv");
-    			add_location(div1, file$6, 246, 10, 7760);
+    			attr_dev(label1, "class", "svelte-rkvaqi");
+    			add_location(label1, file$6, 319, 12, 9677);
+    			add_location(span1, file$6, 320, 12, 9727);
+    			attr_dev(div1, "class", "item svelte-rkvaqi");
+    			add_location(div1, file$6, 318, 10, 9645);
     			attr_dev(label2, "for", "");
-    			attr_dev(label2, "class", "svelte-1c48nfv");
-    			add_location(label2, file$6, 251, 12, 7940);
-    			add_location(span2, file$6, 252, 12, 7985);
-    			attr_dev(div2, "class", "item svelte-1c48nfv");
-    			add_location(div2, file$6, 250, 10, 7908);
+    			attr_dev(label2, "class", "svelte-rkvaqi");
+    			add_location(label2, file$6, 323, 12, 9825);
+    			add_location(span2, file$6, 324, 12, 9870);
+    			attr_dev(div2, "class", "item svelte-rkvaqi");
+    			add_location(div2, file$6, 322, 10, 9793);
     			attr_dev(label3, "for", "");
-    			attr_dev(label3, "class", "svelte-1c48nfv");
-    			add_location(label3, file$6, 255, 12, 8089);
-    			add_location(span3, file$6, 256, 12, 8131);
-    			attr_dev(div3, "class", "item svelte-1c48nfv");
-    			add_location(div3, file$6, 254, 10, 8057);
-    			attr_dev(div4, "class", "info svelte-1c48nfv");
-    			add_location(div4, file$6, 241, 8, 7582);
-    			if (img.src !== (img_src_value = /*data*/ ctx[6].current.condition.icon)) attr_dev(img, "src", img_src_value);
+    			attr_dev(label3, "class", "svelte-rkvaqi");
+    			add_location(label3, file$6, 327, 12, 9974);
+    			add_location(span3, file$6, 328, 12, 10016);
+    			attr_dev(div3, "class", "item svelte-rkvaqi");
+    			add_location(div3, file$6, 326, 10, 9942);
+    			attr_dev(div4, "class", "info svelte-rkvaqi");
+    			add_location(div4, file$6, 313, 8, 9467);
+    			if (img.src !== (img_src_value = /*data*/ ctx[13].current.condition.icon)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", "svelte-1c48nfv");
-    			add_location(img, file$6, 262, 12, 8328);
+    			attr_dev(img, "class", "svelte-rkvaqi");
+    			add_location(img, file$6, 334, 12, 10213);
     			set_style(span4, "display", "block");
-    			add_location(span4, file$6, 263, 12, 8390);
-    			attr_dev(div5, "class", "item svelte-1c48nfv");
-    			add_location(div5, file$6, 260, 10, 8242);
+    			add_location(span4, file$6, 335, 12, 10275);
+    			attr_dev(div5, "class", "item svelte-rkvaqi");
+    			add_location(div5, file$6, 332, 10, 10127);
     			attr_dev(label4, "for", "");
-    			attr_dev(label4, "class", "svelte-1c48nfv");
-    			add_location(label4, file$6, 266, 12, 8516);
-    			add_location(span5, file$6, 267, 12, 8560);
-    			attr_dev(div6, "class", "item svelte-1c48nfv");
-    			add_location(div6, file$6, 265, 10, 8484);
+    			attr_dev(label4, "class", "svelte-rkvaqi");
+    			add_location(label4, file$6, 338, 12, 10401);
+    			add_location(span5, file$6, 339, 12, 10445);
+    			attr_dev(div6, "class", "item svelte-rkvaqi");
+    			add_location(div6, file$6, 337, 10, 10369);
     			attr_dev(label5, "for", "");
-    			attr_dev(label5, "class", "svelte-1c48nfv");
-    			add_location(label5, file$6, 270, 12, 8660);
-    			add_location(span6, file$6, 271, 12, 8707);
-    			attr_dev(div7, "class", "item svelte-1c48nfv");
-    			add_location(div7, file$6, 269, 10, 8628);
-    			attr_dev(div8, "class", "info svelte-1c48nfv");
-    			add_location(div8, file$6, 259, 8, 8212);
+    			attr_dev(label5, "class", "svelte-rkvaqi");
+    			add_location(label5, file$6, 342, 12, 10545);
+    			add_location(span6, file$6, 343, 12, 10592);
+    			attr_dev(div7, "class", "item svelte-rkvaqi");
+    			add_location(div7, file$6, 341, 10, 10513);
+    			attr_dev(div8, "class", "info svelte-rkvaqi");
+    			add_location(div8, file$6, 331, 8, 10097);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div4, anchor);
@@ -32492,7 +32612,20 @@ var app = (function () {
     			append_dev(span6, t29);
     			append_dev(span6, t30);
     		},
-    		p: noop,
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*test*/ 2 && t2_value !== (t2_value = /*data*/ ctx[13].current.wind_kph + "")) set_data_dev(t2, t2_value);
+    			if (dirty & /*test*/ 2 && t7_value !== (t7_value = /*data*/ ctx[13].current.wind_dir + "")) set_data_dev(t7, t7_value);
+    			if (dirty & /*test*/ 2 && t11_value !== (t11_value = /*data*/ ctx[13].current.feelslike_c + "")) set_data_dev(t11, t11_value);
+    			if (dirty & /*test*/ 2 && t16_value !== (t16_value = /*data*/ ctx[13].current.temp_c + "")) set_data_dev(t16, t16_value);
+
+    			if (dirty & /*test*/ 2 && img.src !== (img_src_value = /*data*/ ctx[13].current.condition.icon)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*test*/ 2 && t20_value !== (t20_value = /*data*/ ctx[13].current.condition.text + "")) set_data_dev(t20, t20_value);
+    			if (dirty & /*test*/ 2 && t24_value !== (t24_value = /*data*/ ctx[13].current.humidity + "")) set_data_dev(t24, t24_value);
+    			if (dirty & /*test*/ 2 && t29_value !== (t29_value = /*data*/ ctx[13].current.cloud + "")) set_data_dev(t29, t29_value);
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div4);
     			if (detaching) detach_dev(t18);
@@ -32504,14 +32637,14 @@ var app = (function () {
     		block,
     		id: create_then_block.name,
     		type: "then",
-    		source: "(241:6) {:then data}",
+    		source: "(313:6) {:then data}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (239:19)           <h2>loading</h2>        {:then data}
+    // (311:19)           <h2>loading</h2>        {:then data}
     function create_pending_block(ctx) {
     	let h2;
 
@@ -32519,7 +32652,7 @@ var app = (function () {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "loading";
-    			add_location(h2, file$6, 239, 8, 7536);
+    			add_location(h2, file$6, 311, 8, 9421);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -32534,7 +32667,7 @@ var app = (function () {
     		block,
     		id: create_pending_block.name,
     		type: "pending",
-    		source: "(239:19)           <h2>loading</h2>        {:then data}",
+    		source: "(311:19)           <h2>loading</h2>        {:then data}",
     		ctx
     	});
 
@@ -32543,15 +32676,28 @@ var app = (function () {
 
     function create_fragment$6(ctx) {
     	let div2;
-    	let h1;
-    	let t1;
+    	let promise;
+    	let t0;
     	let div1;
     	let canvas;
-    	let t2;
+    	let t1;
     	let div0;
-    	let promise;
+    	let promise_1;
 
     	let info = {
+    		ctx,
+    		current: null,
+    		token: null,
+    		hasCatch: false,
+    		pending: create_pending_block_1,
+    		then: create_then_block_1,
+    		catch: create_catch_block_1,
+    		value: 13
+    	};
+
+    	handle_promise(promise = /*test*/ ctx[1], info);
+
+    	let info_1 = {
     		ctx,
     		current: null,
     		token: null,
@@ -32559,57 +32705,65 @@ var app = (function () {
     		pending: create_pending_block,
     		then: create_then_block,
     		catch: create_catch_block,
-    		value: 6
+    		value: 13
     	};
 
-    	handle_promise(promise = /*test*/ ctx[0], info);
+    	handle_promise(promise_1 = /*test*/ ctx[1], info_1);
 
     	const block = {
     		c: function create() {
     			div2 = element("div");
-    			h1 = element("h1");
-    			h1.textContent = "Weather";
-    			t1 = space();
+    			info.block.c();
+    			t0 = space();
     			div1 = element("div");
     			canvas = element("canvas");
-    			t2 = space();
+    			t1 = space();
     			div0 = element("div");
-    			info.block.c();
-    			attr_dev(h1, "class", "svelte-1c48nfv");
-    			add_location(h1, file$6, 234, 2, 7432);
+    			info_1.block.c();
     			attr_dev(canvas, "id", "chart");
-    			attr_dev(canvas, "class", "svelte-1c48nfv");
-    			add_location(canvas, file$6, 236, 4, 7473);
-    			add_location(div0, file$6, 237, 4, 7500);
+    			attr_dev(canvas, "class", "svelte-rkvaqi");
+    			add_location(canvas, file$6, 308, 4, 9358);
+    			add_location(div0, file$6, 309, 4, 9385);
     			attr_dev(div1, "id", "data");
-    			attr_dev(div1, "class", "svelte-1c48nfv");
-    			add_location(div1, file$6, 235, 2, 7452);
+    			attr_dev(div1, "class", "svelte-rkvaqi");
+    			add_location(div1, file$6, 307, 2, 9337);
     			attr_dev(div2, "id", "widget");
-    			attr_dev(div2, "class", "svelte-1c48nfv");
-    			add_location(div2, file$6, 233, 0, 7411);
+    			attr_dev(div2, "class", "svelte-rkvaqi");
+    			add_location(div2, file$6, 285, 0, 8834);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
-    			append_dev(div2, h1);
-    			append_dev(div2, t1);
+    			info.block.m(div2, info.anchor = null);
+    			info.mount = () => div2;
+    			info.anchor = t0;
+    			append_dev(div2, t0);
     			append_dev(div2, div1);
     			append_dev(div1, canvas);
-    			append_dev(div1, t2);
+    			append_dev(div1, t1);
     			append_dev(div1, div0);
-    			info.block.m(div0, info.anchor = null);
-    			info.mount = () => div0;
-    			info.anchor = null;
+    			info_1.block.m(div0, info_1.anchor = null);
+    			info_1.mount = () => div0;
+    			info_1.anchor = null;
     		},
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
+    			info.ctx = ctx;
 
-    			{
+    			if (dirty & /*test*/ 2 && promise !== (promise = /*test*/ ctx[1]) && handle_promise(promise, info)) ; else {
     				const child_ctx = ctx.slice();
-    				child_ctx[6] = info.resolved;
+    				child_ctx[13] = info.resolved;
     				info.block.p(child_ctx, dirty);
+    			}
+
+    			info_1.ctx = ctx;
+
+    			if (dirty & /*test*/ 2 && promise_1 !== (promise_1 = /*test*/ ctx[1]) && handle_promise(promise_1, info_1)) ; else {
+    				const child_ctx = ctx.slice();
+    				child_ctx[13] = info_1.resolved;
+    				info_1.block.p(child_ctx, dirty);
     			}
     		},
     		i: noop,
@@ -32619,6 +32773,9 @@ var app = (function () {
     			info.block.d();
     			info.token = null;
     			info = null;
+    			info_1.block.d();
+    			info_1.token = null;
+    			info_1 = null;
     		}
     	};
 
@@ -32684,14 +32841,23 @@ var app = (function () {
     	};
 
     	
+    	let city = "";
+    	let chart;
 
-    	function getChart(city) {
+    	function getHistory(city) {
     		return __awaiter(this, void 0, void 0, function* () {
-    			Chart.Chart.defaults.global.defaultFontColor = "white";
     			const data = yield axios$1.get(`/weather/history/${city}`);
     			const temp = data.data.forecast.forecastday[0].hour.map(h => h.temp_c);
     			const dates = data.data.forecast.forecastday[0].hour.map(h => new Date(h.time));
     			const date = new Date();
+    			return { temp, dates, date };
+    		});
+    	}
+
+    	function getChart(city) {
+    		return __awaiter(this, void 0, void 0, function* () {
+    			Chart.Chart.defaults.global.defaultFontColor = "white";
+    			const { date, dates, temp } = yield getHistory(city);
     			const splitIndex = dates.findIndex(d => d.getHours() === date.getHours()) + 1;
     			const history = temp.slice(0, splitIndex);
     			const forecast = temp.slice(splitIndex - 1);
@@ -32777,6 +32943,31 @@ var app = (function () {
     						]
     					}
     				});
+
+    			return chart;
+    		});
+    	}
+
+    	function updateChart() {
+    		return __awaiter(this, void 0, void 0, function* () {
+    			const { date, dates, temp } = yield getHistory(city);
+    			const splitIndex = dates.findIndex(d => d.getHours() === date.getHours()) + 1;
+    			const history = temp.slice(0, splitIndex);
+    			const forecast = temp.slice(splitIndex - 1);
+
+    			chart.data.datasets[0].data = temp.map((t, i) => {
+    				return { x: i, y: t };
+    			});
+
+    			chart.data.datasets[1].data = history.map((h, i) => {
+    				return { x: i, y: h };
+    			});
+
+    			chart.data.datasets[2].data = forecast.map((f, i) => {
+    				return { x: i + history.length - 1, y: f };
+    			});
+
+    			chart.update();
     		});
     	}
 
@@ -32792,13 +32983,14 @@ var app = (function () {
     	function ip() {
     		return __awaiter(this, void 0, void 0, function* () {
     			const data = yield axios$1.get(`/weather/ip`);
-    			console.log(data.data);
+    			return data.data.location.name;
     		});
     	}
 
     	onMount(() => __awaiter(void 0, void 0, void 0, function* () {
-    		getChart("Stuttgart");
-    		ip();
+    		const name = yield ip();
+    		$$invalidate(0, city = name);
+    		chart = yield getChart(name);
     	}));
 
     	const writable_props = [];
@@ -32807,13 +32999,34 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1$2.warn(`<Weather> was created with unknown prop '${key}'`);
     	});
 
+    	function input_input_handler() {
+    		city = this.value;
+    		$$invalidate(0, city);
+    	}
+
+    	const keydown_handler = e => {
+    		if (e.key === "Enter") {
+    			updateChart();
+    			$$invalidate(1, test = getCurrent(city));
+    		}
+    	};
+
+    	const click_handler = async () => {
+    		updateChart();
+    		$$invalidate(1, test = getCurrent(city));
+    	};
+
     	$$self.$capture_state = () => ({
     		__awaiter,
     		Axios: axios$1,
     		Chart: Chart.Chart,
     		onMount,
+    		city,
+    		chart,
     		convertDateToTimeString,
+    		getHistory,
     		getChart,
+    		updateChart,
     		getCurrent,
     		test,
     		ip
@@ -32821,14 +33034,24 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ("__awaiter" in $$props) __awaiter = $$props.__awaiter;
-    		if ("test" in $$props) $$invalidate(0, test = $$props.test);
+    		if ("city" in $$props) $$invalidate(0, city = $$props.city);
+    		if ("chart" in $$props) chart = $$props.chart;
+    		if ("test" in $$props) $$invalidate(1, test = $$props.test);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [test];
+    	return [
+    		city,
+    		test,
+    		updateChart,
+    		getCurrent,
+    		input_input_handler,
+    		keydown_handler,
+    		click_handler
+    	];
     }
 
     class Weather extends SvelteComponentDev {

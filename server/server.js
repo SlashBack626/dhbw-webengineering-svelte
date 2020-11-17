@@ -7,6 +7,7 @@ const axios_1 = __importDefault(require("axios"));
 const express_1 = __importDefault(require("express"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const http_1 = __importDefault(require("http"));
+const public_ip_1 = __importDefault(require("public-ip"));
 const app = express_1.default();
 const server = http_1.default.createServer(app);
 const io = socket_io_1.default(server);
@@ -32,10 +33,18 @@ app.get("/wikisearch/:search", async (req, res) => {
         res.send();
 });
 app.get("/weather/ip", async (req, res) => {
-    console.log(req.connection.remoteAddress);
+    console.log(req.ip);
+    let { ip } = req;
+    if (ip.substr(0, 7) === "::ffff:") {
+        ip = ip.substring(7);
+    }
+    if (ip.match(/(127\.0\.0\.1)|(::1)/)) {
+        ip = process.env.IPV4;
+    }
+    console.log(ip);
     const { remoteAddress } = req.connection;
     try {
-        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${remoteAddress}`);
+        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${ip}`);
         res.send(weather.data);
     }
     catch (error) {
@@ -87,6 +96,10 @@ io.on("connection", (socket) => {
         });
     });
 });
-server.listen(process.env.PORT, () => {
-    console.log(`Server started on PORT ${process.env.PORT}`);
+public_ip_1.default.v4().then((ip) => {
+    process.env.IPV4 = ip;
+    console.log(process.env.IPV4);
+    server.listen(process.env.PORT, () => {
+        console.log(`Server started on PORT ${process.env.PORT}`);
+    });
 });

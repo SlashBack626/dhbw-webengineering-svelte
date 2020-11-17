@@ -5,6 +5,9 @@
   import { onMount } from "svelte";
   import type { Weather } from "./Interfaces";
 
+  let city = "";
+  let chart: Chart;
+
   function convertDateToTimeString(date: Date): string {
     let str = "";
     if (date.getHours() < 10) str += "0";
@@ -15,8 +18,7 @@
     return str;
   }
 
-  async function getChart(city: string) {
-    Chart.defaults.global.defaultFontColor = "white";
+  async function getHistory(city: string) {
     const data = await Axios.get<Weather.ForecastResponse>(
       `/weather/history/${city}`
     );
@@ -25,6 +27,12 @@
       (h) => new Date(h.time)
     );
     const date = new Date();
+    return { temp, dates, date };
+  }
+
+  async function getChart(city: string) {
+    Chart.defaults.global.defaultFontColor = "white";
+    const { date, dates, temp } = await getHistory(city);
     const splitIndex =
       dates.findIndex((d) => d.getHours() === date.getHours()) + 1;
     const history = temp.slice(0, splitIndex);
@@ -105,12 +113,6 @@
             pointRadius: 0,
             hoverRadius: 0,
             backgroundColor: "rgba(10, 132, 255, 0.73)",
-            // pointBackgroundColor: (context): string => {
-            //   const { dataIndex } = context;
-            //   const date = new Date();
-            //   if (dataIndex === history.length - 1) return "red";
-            //   else return "rgb(10, 132, 255)";
-            // },
           },
           {
             xAxisID: "test",
@@ -128,16 +130,35 @@
             pointRadius: 0,
             hoverRadius: 0,
             backgroundColor: "rgba(134, 117, 105, 0.63)",
-            // pointBackgroundColor: (context): string => {
-            //   const { dataIndex } = context;
-            //   console.log();
-            //   if (dataIndex === 0) return "red";
-            //   else return "rgb(255, 127, 0)";
-            // },
           },
         ],
       },
     });
+    return chart;
+  }
+
+  async function updateChart() {
+    const { date, dates, temp } = await getHistory(city);
+    const splitIndex =
+      dates.findIndex((d) => d.getHours() === date.getHours()) + 1;
+    const history = temp.slice(0, splitIndex);
+    const forecast = temp.slice(splitIndex - 1);
+    chart.data.datasets[0].data = temp.map((t, i) => {
+      return {
+        x: i,
+        y: t,
+      };
+    });
+    chart.data.datasets[1].data = history.map((h, i) => {
+      return { x: i, y: h };
+    });
+    chart.data.datasets[2].data = forecast.map((f, i) => {
+      return {
+        x: i + history.length - 1,
+        y: f,
+      };
+    });
+    chart.update();
   }
 
   async function getCurrent(city: string) {
@@ -152,12 +173,13 @@
 
   async function ip() {
     const data = await Axios.get<Weather.CurrentResponse>(`/weather/ip`);
-    console.log(data.data);
+    return data.data.location.name;
   }
 
   onMount(async () => {
-    getChart("Stuttgart");
-    ip();
+    const name = await ip();
+    city = name;
+    chart = await getChart(name);
   });
 </script>
 
@@ -174,10 +196,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-  }
-
-  h1 {
-    margin: 0;
   }
 
   #chart {
@@ -237,10 +255,52 @@
       max-width: 100%;
     }
   }
+
+  button {
+    /* margin: 1rem; */
+    background-color: lightgreen;
+  }
+
+  #top {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  input {
+    margin: 1rem;
+  }
+
+  h1 {
+    text-align: center;
+    display: inline;
+    margin: 0;
+  }
 </style>
 
 <div id="widget">
-  <h1>Weather</h1>
+  {#await test}
+    <h1>loading</h1>
+  {:then data}
+    <div id="top">
+      <h1>Weather in</h1>
+      <input
+        type="text"
+        bind:value={city}
+        on:keydown={(e) => {
+          if (e.key === 'Enter') {
+            updateChart();
+            test = getCurrent(city);
+          }
+        }} />
+      <button
+        on:click={async () => {
+          updateChart();
+          test = getCurrent(city);
+        }}>GO</button>
+    </div>
+  {/await}
   <div id="data">
     <canvas id="chart" />
     <div>
