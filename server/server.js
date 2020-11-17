@@ -31,6 +31,31 @@ app.get("/wikisearch/:search", async (req, res) => {
     else
         res.send();
 });
+app.get("/weather/ip", async (req, res) => {
+    console.log(req.connection.remoteAddress);
+    const { remoteAddress } = req.connection;
+    try {
+        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${remoteAddress}`);
+        res.send(weather.data);
+    }
+    catch (error) {
+        res.sendStatus(400);
+    }
+});
+app.get("/weather/:cmd/:city", async (req, res) => {
+    const { city, cmd } = req.params;
+    if (cmd.toLowerCase() === "history") {
+        const date = new Date();
+        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${city}&dt=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+        res.send(weather.data);
+    }
+    else if (cmd.toLowerCase() === "current") {
+        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`);
+        res.send(weather.data);
+    }
+    else
+        res.sendStatus(404);
+});
 io.on("connection", (socket) => {
     console.log("someone connected");
     const rooms = [];

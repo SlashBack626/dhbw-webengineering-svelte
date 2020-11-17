@@ -2,7 +2,7 @@ import Axios from "axios";
 import express from "express";
 import socketIO from "socket.io";
 import http from "http";
-import { Message, GetAllResponse, MessageData } from "./interfaces";
+import { Message, GetAllResponse, MessageData, Weather } from "./interfaces";
 
 const app = express();
 const server = http.createServer(app);
@@ -30,6 +30,41 @@ app.get("/wikisearch/:search", async (req, res) => {
     res.send({ results: results });
     return;
   } else res.send();
+});
+
+app.get("/weather/ip", async (req, res) => {
+  console.log(req.connection.remoteAddress);
+  const { remoteAddress } = req.connection;
+  try {
+    const weather = await Axios.get<Weather.ForecastResponse>(
+      `https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${remoteAddress}`
+    );
+
+    res.send(weather.data);
+  } catch (error) {
+    res.sendStatus(400);
+  }
+});
+
+app.get("/weather/:cmd/:city", async (req, res) => {
+  const { city, cmd } = req.params;
+  if (cmd.toLowerCase() === "history") {
+    const date = new Date();
+
+    const weather = await Axios.get<Weather.ForecastResponse>(
+      `https://api.weatherapi.com/v1/history.json?key=${
+        process.env.WEATHER_API
+      }&q=${city}&dt=${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`
+    );
+    res.send(weather.data);
+  } else if (cmd.toLowerCase() === "current") {
+    const weather = await Axios.get<Weather.ForecastResponse>(
+      `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`
+    );
+    res.send(weather.data);
+  } else res.sendStatus(404);
 });
 
 io.on("connection", (socket) => {

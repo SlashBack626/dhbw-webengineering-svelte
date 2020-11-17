@@ -4,6 +4,7 @@
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";
   import Header from "./Header.svelte";
+  import Weather from "./Weather.svelte";
   import WikiSearch from "./WikiSearch.svelte";
   let navHeight;
   const descriptions = {
@@ -44,25 +45,32 @@
       "https://cdn.pixabay.com/photo/2016/03/04/19/36/gears-1236578_960_720.jpg",
   };
 
-  let showServices = false;
+  let site: "services" | "weather" | "main" = "main";
 
   function onNavClick(
     event: CustomEvent<
-      "informatik" | "elektrotechnik" | "maschinenbau" | "services"
+      "informatik" | "elektrotechnik" | "maschinenbau" | "services" | "weather"
     >
   ) {
     if (event.detail === "services") {
-      showServices = true;
       document.body.style.overflow = "hidden";
-    } else {
-      let section = document.getElementById(event.detail);
-      section.scrollIntoView({ behavior: "smooth" });
+    }
+    if (
+      event.detail === "elektrotechnik" ||
+      event.detail === "informatik" ||
+      event.detail === "maschinenbau"
+    ) {
+      site = "main";
+      let section = document.getElementById(event.detail); // section will be null if the faculties need to mount first
+      section?.scrollIntoView({ behavior: "smooth" }); // --> we cannot scroll then
       // section.scrollBy({ top: navHeight, behavior: "smooth" });
+    } else {
+      site = event.detail;
     }
   }
 
   function closePopup(event: MouseEvent) {
-    showServices = false;
+    site = "main";
     document.body.style.overflow = "auto";
   }
 </script>
@@ -98,23 +106,27 @@
 
 <Header title="DHBW WebEngineering" on:navClick={onNavClick} />
 <main>
-  <Faculty
-    id="informatik"
-    name="Informatik"
-    description={descriptions.informatik}
-    img={imgs.informatik} />
-  <Faculty
-    id="elektrotechnik"
-    name="Elektrotechnik"
-    description={descriptions.elektrotechnik}
-    img={imgs.elektrotechnik} />
-  <Faculty
-    id="maschinenbau"
-    name="Maschinenbau"
-    description={descriptions.maschinenbau}
-    img={imgs.maschinenbau} />
+  {#if site == 'main' || site == 'services'}
+    <Faculty
+      id="informatik"
+      name="Informatik"
+      description={descriptions.informatik}
+      img={imgs.informatik} />
+    <Faculty
+      id="elektrotechnik"
+      name="Elektrotechnik"
+      description={descriptions.elektrotechnik}
+      img={imgs.elektrotechnik} />
+    <Faculty
+      id="maschinenbau"
+      name="Maschinenbau"
+      description={descriptions.maschinenbau}
+      img={imgs.maschinenbau} />
+  {:else if site == 'weather'}
+    <Weather />
+  {/if}
 </main>
-{#if showServices}
+{#if site == 'services'}
   <div id="popupRoot">
     <img src="./assets/close.svg" alt="close" on:click={closePopup} />
     <WikiSearch />

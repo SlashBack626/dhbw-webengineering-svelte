@@ -93,6 +93,7 @@
     <li on:click={() => forward('informatik')}>Informatik</li>
     <li on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
     <li on:click={() => forward('maschinenbau')}>Maschinenbau</li>
+    <li on:click={() => forward('weather')}>Weather</li>
     <li on:click={() => forward('services')}>Services</li>
   </ul>
 </nav>
