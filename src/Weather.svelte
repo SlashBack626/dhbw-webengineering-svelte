@@ -3,20 +3,22 @@
 
   import { Chart } from "chart.js";
   import { onMount } from "svelte";
+  import App from "./App.svelte";
+  import Chat from "./Chat.svelte";
   import type { Weather } from "./Interfaces";
+  import WeatherChart from "./WeatherChart.svelte";
 
-  let city = "";
+  let city: string = null;
   let chart: Chart;
-
-  function convertDateToTimeString(date: Date): string {
-    let str = "";
-    if (date.getHours() < 10) str += "0";
-    str += date.getHours();
-    str += ":";
-    if (date.getMinutes() < 10) str += "0";
-    str += date.getMinutes();
-    return str;
-  }
+  let loading = true;
+  let currentData: Weather.CurrentResponse;
+  let chartData: {
+    temp: number[];
+    history: number[];
+    forecast: number[];
+    dates: Date[];
+    index: number;
+  };
 
   async function getHistory(city: string) {
     const data = await Axios.get<Weather.ForecastResponse>(
@@ -30,135 +32,13 @@
     return { temp, dates, date };
   }
 
-  async function getChart(city: string) {
+  async function getChartData(city: string) {
     Chart.defaults.global.defaultFontColor = "white";
     const { date, dates, temp } = await getHistory(city);
-    const splitIndex =
-      dates.findIndex((d) => d.getHours() === date.getHours()) + 1;
-    const history = temp.slice(0, splitIndex);
-    const forecast = temp.slice(splitIndex - 1);
-    console.log(history);
-    console.log(forecast);
-    const chart = new Chart("chart", {
-      type: "scatter",
-      options: {
-        maintainAspectRatio: false,
-        title: {
-          display: false,
-          text: `Stuttgart today`,
-        },
-        scales: {
-          gridLines: {
-            color: "white",
-          },
-          yAxes: [
-            {
-              gridLines: {
-                color: "rgba(100,100,100, 0.8)",
-              },
-            },
-          ],
-          xAxes: [
-            {
-              id: "test",
-              gridLines: {
-                color: "rgba(100,100,100, 0.8)",
-              },
-              ticks: {
-                max: 23,
-                min: 0,
-                callback: (val) => {
-                  console.log(val);
-                  return convertDateToTimeString(dates[val]);
-                },
-              },
-            },
-          ],
-        },
-      },
-      data: {
-        labels: dates.map((d) => convertDateToTimeString(d)),
-        datasets: [
-          {
-            label: "Temperature",
-            data: temp.map((t, i) => {
-              return {
-                x: i,
-                y: t,
-              };
-            }),
-            xAxisID: "test",
-            type: "line",
-            showLine: false,
-            borderColor: "white",
-            borderWidth: 1,
-            backgroundColor: "transparent",
-            pointBackgroundColor: (context): string => {
-              const { dataIndex } = context;
-              if (dataIndex === splitIndex - 1) return "red";
-              else if (dataIndex > splitIndex - 1) return "orange";
-              else return "blue";
-            },
-          },
-          {
-            xAxisID: "test",
-            label: "History",
-            data: history.map((h, i) => {
-              return { x: i, y: h };
-            }),
-            type: "line",
-            showLine: true,
-            borderColor: "white",
-            borderWidth: 1,
-            pointRadius: 0,
-            hoverRadius: 0,
-            backgroundColor: "rgba(10, 132, 255, 0.73)",
-          },
-          {
-            xAxisID: "test",
-            label: "Forecast",
-            data: forecast.map((f, i) => {
-              return {
-                x: i + history.length - 1,
-                y: f,
-              };
-            }),
-            type: "line",
-            showLine: true,
-            borderColor: "white",
-            borderWidth: 1,
-            pointRadius: 0,
-            hoverRadius: 0,
-            backgroundColor: "rgba(134, 117, 105, 0.63)",
-          },
-        ],
-      },
-    });
-    return chart;
-  }
-
-  async function updateChart() {
-    const { date, dates, temp } = await getHistory(city);
-    const splitIndex =
-      dates.findIndex((d) => d.getHours() === date.getHours()) + 1;
-    const history = temp.slice(0, splitIndex);
-    const forecast = temp.slice(splitIndex - 1);
-    chart.data.datasets[0].data = temp.map((t, i) => {
-      return {
-        x: i,
-        y: t,
-      };
-    });
-    chart.data.datasets[1].data = history.map((h, i) => {
-      return { x: i, y: h };
-    });
-    chart.data.datasets[2].data = forecast.map((f, i) => {
-      return {
-        x: i + history.length - 1,
-        y: f,
-      };
-    });
-    chart.update();
+    const index = dates.findIndex((d) => d.getHours() === date.getHours()) + 1;
+    const history = temp.slice(0, index);
+    const forecast = temp.slice(index - 1);
+    return { history, forecast, temp, dates, index };
   }
 
   async function getCurrent(city: string) {
@@ -169,7 +49,14 @@
     return data.data;
   }
 
-  let test = getCurrent("Stuttgart");
+  async function update() {
+    [chartData, currentData] = await Promise.all([
+      getChartData(city),
+      getCurrent(city),
+    ]);
+
+    city = currentData.location.name;
+  }
 
   async function ip() {
     try {
@@ -183,7 +70,12 @@
   onMount(async () => {
     const name = await ip();
     city = name;
-    chart = await getChart(name);
+    [currentData, chartData] = await Promise.all([
+      getCurrent(name),
+      getChartData(name),
+    ]);
+    loading = false;
+    // createChart(chartData);
   });
 </script>
 
@@ -200,15 +92,6 @@
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-  }
-
-  #chart {
-    min-width: 300px;
-    max-width: 80vw;
-    width: 100%;
-    min-height: 300px;
-    max-height: 50vh;
-    /* max-width: 800px; */
   }
 
   .info {
@@ -243,20 +126,11 @@
     #data {
       flex-flow: row nowrap;
     }
-    #chart {
-      max-width: 50vw;
-    }
   }
 
   @media (min-width: 700px) {
     .info {
       flex-flow: row nowrap;
-    }
-  }
-
-  @media (max-width: 900px) {
-    #chart {
-      max-width: 100%;
     }
   }
 
@@ -281,70 +155,68 @@
     display: inline;
     margin: 0;
   }
+
+  #loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 
 <div id="widget">
-  {#await test}
-    <h1>loading</h1>
-  {:then data}
+  {#if loading}
+    <div id="loading">
+      <h1>Loading</h1>
+    </div>
+  {:else}
     <div id="top">
       <h1>Weather in</h1>
       <input
         type="text"
         bind:value={city}
-        on:keydown={(e) => {
-          if (e.key === 'Enter') {
-            updateChart();
-            test = getCurrent(city);
-          }
+        on:keydown={async (e) => {
+          if (e.key === 'Enter') update();
         }} />
-      <button
-        on:click={async () => {
-          updateChart();
-          test = getCurrent(city);
-        }}>GO</button>
+      <button on:click={update}>GO</button>
     </div>
-  {/await}
-  <div id="data">
-    <canvas id="chart" />
-    <div>
-      {#await test}
-        <h2>loading</h2>
-      {:then data}
+    <div id="data">
+      <WeatherChart {...chartData} />
+      <div>
         <div class="info">
           <div class="item">
             <label for="">Windspeed</label>
-            <span>{data.current.wind_kph} km/h</span>
+            <span>{currentData.current.wind_kph} km/h</span>
           </div>
           <div class="item">
             <label for="">Wind direction</label>
-            <span>{data.current.wind_dir}</span>
+            <span>{currentData.current.wind_dir}</span>
           </div>
           <div class="item">
             <label for="">Feel like</label>
-            <span>{data.current.feelslike_c} °C</span>
+            <span>{currentData.current.feelslike_c} °C</span>
           </div>
           <div class="item">
             <label for="">Actual</label>
-            <span>{data.current.temp_c} °C</span>
+            <span>{currentData.current.temp_c} °C</span>
           </div>
         </div>
         <div class="info">
           <div class="item">
             <!-- <label for="">Condition</label> -->
-            <img src={data.current.condition.icon} alt="" />
-            <span style="display:block">{data.current.condition.text}</span>
+            <img src={currentData.current.condition.icon} alt="" />
+            <span
+              style="display:block">{currentData.current.condition.text}</span>
           </div>
           <div class="item">
             <label for="">Humidity</label>
-            <span>{data.current.humidity} %</span>
+            <span>{currentData.current.humidity} %</span>
           </div>
           <div class="item">
             <label for="">Cloud cover</label>
-            <span>{data.current.cloud} %</span>
+            <span>{currentData.current.cloud} %</span>
           </div>
         </div>
-      {/await}
+      </div>
     </div>
-  </div>
+  {/if}
 </div>
