@@ -12,7 +12,7 @@ This project is the result for the Exam in Webengineering from DHBW
 
 ## Prerequisite
 
-- For this project to work you need a valid API Key from [weatherapi.com](). Create a free account and copy your API key.
+- For this project to work you need a valid API Key from [weatherapi.com](https://www.weatherapi.com/). Create a free account and copy your API key.
 
 - Node.js 14.9
 
