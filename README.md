@@ -18,35 +18,35 @@ This project is the result for the Exam in Webengineering from DHBW
 
 ## Installation
 
-1. Clone this repository:<br>
-   `git clone https://github.com/SlashBack626/dhbw-webengineering-svelte`
+1.  Clone this repository:<br>
+    `git clone https://github.com/SlashBack626/dhbw-webengineering-svelte`
 
-2. Navigate to the root folder of this project:<br>
-   `cd dhbw-webengineering-svelte`
+2.  Navigate to the root folder of this project:<br>
+    `cd dhbw-webengineering-svelte`
 
-3. install dependencies:<br>
-   `npm i`
+3.  install dependencies:<br>
+    `npm i`
 
-4. setup Environment Variables:<br>
-   | Variable | Value | Default| Required|
-   |----------|-------|--------|---------|
-   | PORT | \<Your preferred PORT> | 5000| :x: |
-   | WEATHER_API | \<Your API key from weatherapi.com> | None| :heavy_check_mark:
+4.  setup Environment Variables:<br>
+    | Variable | Value | Default| Required|
+    |----------|-------|--------|---------|
+    | PORT | \<Your preferred PORT> | 5000| :x: |
+    | WEATHER_API | \<Your API key from weatherapi.com> | None| :heavy_check_mark:
 
-   in Windows Powershell you would write it like this:<br>
+    in Windows Powershell you would write it like this:<br>
 
-   ```bash
-   $env:PORT=<PORT>
-   $env:WEATHER_API=<API KEY>
-   ```
+    ```bash
+    $env:PORT=<PORT>
+    $env:WEATHER_API=<API KEY>
+    ```
 
-   <br>
-    Alternatively you can edit the `rollup.config.js` file and edit line 25
-    run `npm run dev` and skip step 5
+Alternatively you can edit the `rollup.config.js` file and edit line 25
+run `npm run dev` and skip step 5
+**NOTE**: this approach requires `nodemon` to be installed
 
-5. `npm start`
+5.  `npm start`
 
-6. open browser: localhost:\<PORT><br>
-   e.g. [http://localhost:5000](http://localhost:5000)
+6.  open browser: localhost:\<PORT><br>
+    e.g. [http://localhost:5000](http://localhost:5000)
 
 A live version can be found at [https://svelte-dhbw-webengineering.herokuapp.com/]()
