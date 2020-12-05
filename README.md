@@ -33,7 +33,7 @@ For this project to work you need a valid API Key from [weatherapi.com](). Creat
 
    in Windows Powershell you would write it like this:<br>
 
-   ```ps
+   ```bash
    $env:PORT=<PORT>
    $env:WEATHER_API=<API KEY>
    ```
