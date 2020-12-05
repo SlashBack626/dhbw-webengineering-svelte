@@ -43,6 +43,6 @@ This project is the result for the Exam in Webengineering from DHBW
 5. `npm start`
 
 6. open browser: localhost:\<PORT><br>
-   e.g. [http://localhost:5000]()
+   e.g. [http://localhost:5000](http://localhost:5000)
 
 A live version can be found at [https://svelte-dhbw-webengineering.herokuapp.com/]()
