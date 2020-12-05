@@ -12,7 +12,9 @@ This project is the result for the Exam in Webengineering from DHBW
 
 ## Prerequisite
 
-For this project to work you need a valid API Key from [weatherapi.com](). Create a free account and copy your API key.
+- For this project to work you need a valid API Key from [weatherapi.com](). Create a free account and copy your API key.
+
+- Node.js 14.9
 
 ## Installation
 
@@ -41,6 +43,6 @@ For this project to work you need a valid API Key from [weatherapi.com](). Creat
 5. `npm start`
 
 6. open browser: localhost:\<PORT><br>
-   e.g. [localhost:5000]()
+   e.g. [http://localhost:5000]()
 
-A live version can be found at [http://svelte-dhbw-webengineering.herokuapp.com/]()
+A live version can be found at [https://svelte-dhbw-webengineering.herokuapp.com/]()
