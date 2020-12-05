@@ -41,7 +41,7 @@ This project is the result for the Exam in Webengineering from DHBW
     ```
 
 Alternatively you can edit the `rollup.config.js` file and edit line 25
-run `npm run dev` and skip step 5
+run `npm run dev` and skip step 5<br>
 **NOTE**: this approach requires `nodemon` to be installed
 
 5.  `npm start`
