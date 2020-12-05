@@ -18,11 +18,15 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require("child_process").spawn("node", ["./server/server.js"], {
-        env: { PORT: 5000 },
-        stdio: ["ignore", "inherit", "inherit"],
-        shell: true,
-      });
+      server = require("child_process").spawn(
+        "nodemon",
+        ["./server/server.js"],
+        {
+          env: { PORT: 5000, WEATHER_API: "<API_KEY>" },
+          stdio: ["ignore", "inherit", "inherit"],
+          shell: true,
+        }
+      );
       // server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
       // 	stdio: ['ignore', 'inherit', 'inherit'],
       // 	shell: true
