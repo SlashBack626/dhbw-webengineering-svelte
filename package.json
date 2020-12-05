@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c && tsc --build ./server/tsconfig.json",
     "dev": "tsc --build ./server/tsconfig.json && rollup -c -w",
-    "start": "sirv public",
+    "start": "node ./server/server.js",
     "validate": "svelte-check"
   },
   "devDependencies": {

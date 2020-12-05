@@ -2,12 +2,17 @@
   import { createEventDispatcher } from "svelte";
 
   export let title: string;
-
+  let showButton: boolean = window.innerWidth <= 580;
+  let collapsed: boolean = true;
   const dispatch = createEventDispatcher();
 
   function forward(event: string) {
     dispatch("navClick", event);
   }
+
+  window.onresize = () => {
+    showButton = window.innerWidth <= 580;
+  };
 </script>
 
 <style>
@@ -52,7 +57,7 @@
     flex-flow: row wrap;
     border-top: 1px solid green;
   }
-  @media (min-width: 550px) {
+  @media (min-width: 580px) {
     ul {
       padding: 0;
       display: flex;
@@ -80,6 +85,21 @@
   li:hover {
     background-color: green;
   }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    margin: 0.5rem;
+  }
+
+  #buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+  }
 </style>
 
 <header>
@@ -90,10 +110,16 @@
 </header>
 <nav>
   <ul>
-    <li on:click={() => forward('informatik')}>Informatik</li>
-    <li on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
-    <li on:click={() => forward('maschinenbau')}>Maschinenbau</li>
-    <li on:click={() => forward('weather')}>Weather</li>
-    <li on:click={() => forward('services')}>Services</li>
+    {#if showButton}
+      <div id="buttonContainer">
+        <button><i class="material-icons">menu</i></button>
+      </div>
+    {:else}
+      <li on:click={() => forward('informatik')}>Informatik</li>
+      <li on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
+      <li on:click={() => forward('maschinenbau')}>Maschinenbau</li>
+      <li on:click={() => forward('weather')}>Weather</li>
+      <li on:click={() => forward('services')}>Services</li>
+    {/if}
   </ul>
 </nav>

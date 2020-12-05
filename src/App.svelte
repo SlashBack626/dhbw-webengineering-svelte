@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Chat from "./Chat.svelte";
   import ChatSelection from "./ChatSelection.svelte";
   import Faculty from "./Faculty.svelte";
   import Footer from "./Footer.svelte";

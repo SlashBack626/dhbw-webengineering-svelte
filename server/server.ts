@@ -2,7 +2,7 @@ import Axios from "axios";
 import express from "express";
 import socketIO from "socket.io";
 import http from "http";
-import { Message, GetAllResponse, MessageData, Weather } from "./interfaces";
+import { GetAllResponse, MessageData, Weather } from "./interfaces";
 import publicIP from "public-ip";
 const app = express();
 const server = http.createServer(app);
@@ -56,23 +56,28 @@ app.get("/weather/ip", async (req, res) => {
 
 app.get("/weather/:cmd/:city", async (req, res) => {
   const { city, cmd } = req.params;
-  if (cmd.toLowerCase() === "history") {
-    const date = new Date();
+  try {
+    if (cmd.toLowerCase() === "history") {
+      const date = new Date();
 
-    const weather = await Axios.get<Weather.ForecastResponse>(
-      `https://api.weatherapi.com/v1/history.json?key=${
-        process.env.WEATHER_API
-      }&q=${city}&dt=${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()}`
-    );
-    res.send(weather.data);
-  } else if (cmd.toLowerCase() === "current") {
-    const weather = await Axios.get<Weather.ForecastResponse>(
-      `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`
-    );
-    res.send(weather.data);
-  } else res.sendStatus(404);
+      const weather = await Axios.get<Weather.ForecastResponse>(
+        `https://api.weatherapi.com/v1/history.json?key=${
+          process.env.WEATHER_API
+        }&q=${city}&dt=${date.getFullYear()}-${
+          date.getMonth() + 1
+        }-${date.getDate()}`
+      );
+      res.send(weather.data);
+    } else if (cmd.toLowerCase() === "current") {
+      const weather = await Axios.get<Weather.ForecastResponse>(
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`
+      );
+      res.send(weather.data);
+    } else res.sendStatus(404);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
 });
 
 io.on("connection", (socket) => {
@@ -115,7 +120,7 @@ io.on("connection", (socket) => {
 publicIP.v4().then((ip) => {
   process.env.IPV4 = ip;
   console.log(process.env.IPV4);
-  server.listen(process.env.PORT, () => {
-    console.log(`Server started on PORT ${process.env.PORT}`);
+  server.listen(process.env.PORT ?? 5000, () => {
+    console.log(`Server started on PORT ${process.env.PORT ?? 5000}`);
   });
 });

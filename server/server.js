@@ -53,17 +53,23 @@ app.get("/weather/ip", async (req, res) => {
 });
 app.get("/weather/:cmd/:city", async (req, res) => {
     const { city, cmd } = req.params;
-    if (cmd.toLowerCase() === "history") {
-        const date = new Date();
-        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${city}&dt=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
-        res.send(weather.data);
+    try {
+        if (cmd.toLowerCase() === "history") {
+            const date = new Date();
+            const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/history.json?key=${process.env.WEATHER_API}&q=${city}&dt=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+            res.send(weather.data);
+        }
+        else if (cmd.toLowerCase() === "current") {
+            const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`);
+            res.send(weather.data);
+        }
+        else
+            res.sendStatus(404);
     }
-    else if (cmd.toLowerCase() === "current") {
-        const weather = await axios_1.default.get(`https://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=${city}`);
-        res.send(weather.data);
+    catch (error) {
+        console.log(error);
+        res.sendStatus(400);
     }
-    else
-        res.sendStatus(404);
 });
 io.on("connection", (socket) => {
     console.log("someone connected");
@@ -99,7 +105,7 @@ io.on("connection", (socket) => {
 public_ip_1.default.v4().then((ip) => {
     process.env.IPV4 = ip;
     console.log(process.env.IPV4);
-    server.listen(process.env.PORT, () => {
-        console.log(`Server started on PORT ${process.env.PORT}`);
+    server.listen(process.env.PORT ?? 5000, () => {
+        console.log(`Server started on PORT ${process.env.PORT ?? 5000}`);
     });
 });

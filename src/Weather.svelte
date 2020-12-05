@@ -3,8 +3,6 @@
 
   import { Chart } from "chart.js";
   import { onMount } from "svelte";
-  import App from "./App.svelte";
-  import Chat from "./Chat.svelte";
   import type { Weather } from "./Interfaces";
   import WeatherChart from "./WeatherChart.svelte";
 
@@ -19,6 +17,7 @@
     dates: Date[];
     index: number;
   };
+  let requestFailed: boolean = false;
 
   async function getHistory(city: string) {
     const data = await Axios.get<Weather.ForecastResponse>(
@@ -41,7 +40,9 @@
     return { history, forecast, temp, dates, index };
   }
 
-  async function getCurrent(city: string) {
+  async function getCurrent(
+    city: string
+  ): Promise<Weather.CurrentResponse | null> {
     const data = await Axios.get<Weather.CurrentResponse>(
       `/weather/current/${city}`
     );
@@ -50,12 +51,16 @@
   }
 
   async function update() {
-    [chartData, currentData] = await Promise.all([
-      getChartData(city),
-      getCurrent(city),
-    ]);
-
-    city = currentData.location.name;
+    try {
+      [chartData, currentData] = await Promise.all([
+        getChartData(city),
+        getCurrent(city),
+      ]);
+      city = currentData.location.name;
+      requestFailed = false;
+    } catch (_) {
+      requestFailed = true;
+    }
   }
 
   async function ip() {
@@ -70,10 +75,7 @@
   onMount(async () => {
     const name = await ip();
     city = name;
-    [currentData, chartData] = await Promise.all([
-      getCurrent(name),
-      getChartData(name),
-    ]);
+    await update();
     loading = false;
     // createChart(chartData);
   });
@@ -161,6 +163,14 @@
     justify-content: center;
     align-items: center;
   }
+
+  .error {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: red;
+  }
 </style>
 
 <div id="widget">
@@ -169,6 +179,9 @@
       <h1>Loading</h1>
     </div>
   {:else}
+    {#if requestFailed}
+      <h3 class="error">could not find what you are looking for</h3>
+    {/if}
     <div id="top">
       <h1>Weather in</h1>
       <input
