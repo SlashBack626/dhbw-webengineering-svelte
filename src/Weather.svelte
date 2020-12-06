@@ -85,7 +85,7 @@
   #widget {
     color: white;
     background-color: #28272c;
-    height: 100%;
+    height: 100vh;
   }
 
   #data {
