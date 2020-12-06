@@ -1,18 +1,24 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
 
   export let title: string;
   let showButton: boolean = window.innerWidth <= 580;
-  let collapsed: boolean = true;
+  let hidden: boolean = showButton;
   const dispatch = createEventDispatcher();
 
   function forward(event: string) {
     dispatch("navClick", event);
   }
 
-  window.onresize = () => {
+  function update() {
+    const oldShowButton = showButton;
     showButton = window.innerWidth <= 580;
-  };
+    if (oldShowButton !== showButton) hidden = showButton;
+  }
+
+  window.onresize = update;
+
+  onMount(update);
 </script>
 
 <style>
@@ -112,14 +118,14 @@
   <ul>
     {#if showButton}
       <div id="buttonContainer">
-        <button><i class="material-icons">menu</i></button>
+        <button on:click={() => (hidden = !hidden)}><i
+            class="material-icons">menu</i></button>
       </div>
-    {:else}
-      <li on:click={() => forward('informatik')}>Informatik</li>
-      <li on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
-      <li on:click={() => forward('maschinenbau')}>Maschinenbau</li>
-      <li on:click={() => forward('weather')}>Weather</li>
-      <li on:click={() => forward('services')}>Services</li>
     {/if}
+    <li {hidden} on:click={() => forward('informatik')}>Informatik</li>
+    <li {hidden} on:click={() => forward('elektrotechnik')}>Elektrotechnik</li>
+    <li {hidden} on:click={() => forward('maschinenbau')}>Maschinenbau</li>
+    <li {hidden} on:click={() => forward('weather')}>Weather</li>
+    <li {hidden} on:click={() => forward('services')}>Services</li>
   </ul>
 </nav>
