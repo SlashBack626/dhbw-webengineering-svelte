@@ -33348,14 +33348,14 @@ var app = (function () {
     			}
 
     			attr_dev(th0, "class", "svelte-1rzy0yl");
-    			add_location(th0, file$8, 90, 10, 2250);
+    			add_location(th0, file$8, 90, 10, 2270);
     			attr_dev(th1, "class", "svelte-1rzy0yl");
-    			add_location(th1, file$8, 91, 10, 2276);
+    			add_location(th1, file$8, 91, 10, 2296);
     			attr_dev(th2, "class", "svelte-1rzy0yl");
-    			add_location(th2, file$8, 92, 10, 2308);
-    			add_location(tr, file$8, 89, 8, 2234);
+    			add_location(th2, file$8, 92, 10, 2328);
+    			add_location(tr, file$8, 89, 8, 2254);
     			attr_dev(table, "class", "svelte-1rzy0yl");
-    			add_location(table, file$8, 88, 6, 2217);
+    			add_location(table, file$8, 88, 6, 2237);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, table, anchor);
@@ -33446,15 +33446,15 @@ var app = (function () {
     			t5 = space();
     			attr_dev(a, "href", a_href_value = "https://de.wikipedia.org/?curid=" + /*page*/ ctx[6].pageid);
     			attr_dev(a, "class", "svelte-1rzy0yl");
-    			add_location(a, file$8, 97, 14, 2422);
+    			add_location(a, file$8, 97, 14, 2442);
     			attr_dev(td0, "class", "svelte-1rzy0yl");
-    			add_location(td0, file$8, 96, 12, 2402);
+    			add_location(td0, file$8, 96, 12, 2422);
     			attr_dev(td1, "class", "svelte-1rzy0yl");
-    			add_location(td1, file$8, 100, 12, 2544);
+    			add_location(td1, file$8, 100, 12, 2564);
     			attr_dev(td2, "class", "svelte-1rzy0yl");
-    			add_location(td2, file$8, 101, 12, 2585);
+    			add_location(td2, file$8, 101, 12, 2605);
     			attr_dev(tr, "class", "svelte-1rzy0yl");
-    			add_location(tr, file$8, 95, 10, 2384);
+    			add_location(tr, file$8, 95, 10, 2404);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -33521,16 +33521,16 @@ var app = (function () {
     			button.textContent = "go";
     			t4 = space();
     			if (if_block) if_block.c();
-    			add_location(span, file$8, 78, 2, 1963);
+    			add_location(span, file$8, 78, 2, 1983);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "svelte-1rzy0yl");
-    			add_location(input, file$8, 80, 4, 2008);
+    			add_location(input, file$8, 80, 4, 2028);
     			attr_dev(button, "class", "svelte-1rzy0yl");
-    			add_location(button, file$8, 86, 4, 2153);
-    			add_location(div0, file$8, 79, 2, 1997);
+    			add_location(button, file$8, 86, 4, 2173);
+    			add_location(div0, file$8, 79, 2, 2017);
     			attr_dev(div1, "id", "popup");
     			attr_dev(div1, "class", "svelte-1rzy0yl");
-    			add_location(div1, file$8, 77, 0, 1943);
+    			add_location(div1, file$8, 77, 0, 1963);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33643,7 +33643,7 @@ var app = (function () {
     	function search() {
     		return __awaiter(this, void 0, void 0, function* () {
     			if (searchText.length === 0) return;
-    			let res = yield axios$1.get(`/wikisearch/${searchText}`);
+    			let res = yield axios$1.get(`/wikisearch/${encodeURIComponent(searchText)}`);
 
     			res.data.results.forEach(page => {
     				console.log(page.title);

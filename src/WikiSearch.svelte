@@ -5,7 +5,9 @@
   let results: WikiSearchResultPage[] = null;
   async function search() {
     if (searchText.length === 0) return;
-    let res = await axios.get<WikiSearch>(`/wikisearch/${searchText}`);
+    let res = await axios.get<WikiSearch>(
+      `/wikisearch/${encodeURIComponent(searchText)}`
+    );
     res.data.results.forEach((page) => {
       console.log(page.title);
     });
