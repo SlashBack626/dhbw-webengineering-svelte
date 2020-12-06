@@ -44,7 +44,7 @@
     city: string
   ): Promise<Weather.CurrentResponse | null> {
     const data = await Axios.get<Weather.CurrentResponse>(
-      `/weather/current/${city}`
+      `/weather/current/${encodeURIComponent(city)}`
     );
 
     return data.data;

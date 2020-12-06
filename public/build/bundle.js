@@ -32787,67 +32787,67 @@ var app = (function () {
     			t36 = text(t36_value);
     			t37 = text(" %");
     			attr_dev(h1, "class", "svelte-bpsveq");
-    			add_location(h1, file$7, 182, 6, 4669);
+    			add_location(h1, file$7, 182, 6, 4689);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "svelte-bpsveq");
-    			add_location(input, file$7, 183, 6, 4696);
+    			add_location(input, file$7, 183, 6, 4716);
     			attr_dev(button, "class", "svelte-bpsveq");
-    			add_location(button, file$7, 189, 6, 4853);
+    			add_location(button, file$7, 189, 6, 4873);
     			attr_dev(div0, "id", "top");
     			attr_dev(div0, "class", "svelte-bpsveq");
-    			add_location(div0, file$7, 181, 4, 4647);
+    			add_location(div0, file$7, 181, 4, 4667);
     			attr_dev(label0, "for", "");
     			attr_dev(label0, "class", "svelte-bpsveq");
-    			add_location(label0, file$7, 196, 12, 5047);
-    			add_location(span0, file$7, 197, 12, 5092);
+    			add_location(label0, file$7, 196, 12, 5067);
+    			add_location(span0, file$7, 197, 12, 5112);
     			attr_dev(div1, "class", "item svelte-bpsveq");
-    			add_location(div1, file$7, 195, 10, 5015);
+    			add_location(div1, file$7, 195, 10, 5035);
     			attr_dev(label1, "for", "");
     			attr_dev(label1, "class", "svelte-bpsveq");
-    			add_location(label1, file$7, 200, 12, 5202);
-    			add_location(span1, file$7, 201, 12, 5252);
+    			add_location(label1, file$7, 200, 12, 5222);
+    			add_location(span1, file$7, 201, 12, 5272);
     			attr_dev(div2, "class", "item svelte-bpsveq");
-    			add_location(div2, file$7, 199, 10, 5170);
+    			add_location(div2, file$7, 199, 10, 5190);
     			attr_dev(label2, "for", "");
     			attr_dev(label2, "class", "svelte-bpsveq");
-    			add_location(label2, file$7, 204, 12, 5357);
-    			add_location(span2, file$7, 205, 12, 5402);
+    			add_location(label2, file$7, 204, 12, 5377);
+    			add_location(span2, file$7, 205, 12, 5422);
     			attr_dev(div3, "class", "item svelte-bpsveq");
-    			add_location(div3, file$7, 203, 10, 5325);
+    			add_location(div3, file$7, 203, 10, 5345);
     			attr_dev(label3, "for", "");
     			attr_dev(label3, "class", "svelte-bpsveq");
-    			add_location(label3, file$7, 208, 12, 5513);
-    			add_location(span3, file$7, 209, 12, 5555);
+    			add_location(label3, file$7, 208, 12, 5533);
+    			add_location(span3, file$7, 209, 12, 5575);
     			attr_dev(div4, "class", "item svelte-bpsveq");
-    			add_location(div4, file$7, 207, 10, 5481);
+    			add_location(div4, file$7, 207, 10, 5501);
     			attr_dev(div5, "class", "info svelte-bpsveq");
-    			add_location(div5, file$7, 194, 8, 4985);
+    			add_location(div5, file$7, 194, 8, 5005);
     			if (img.src !== (img_src_value = /*currentData*/ ctx[2].current.condition.icon)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", "svelte-bpsveq");
-    			add_location(img, file$7, 215, 12, 5759);
+    			add_location(img, file$7, 215, 12, 5779);
     			set_style(span4, "display", "block");
-    			add_location(span4, file$7, 216, 12, 5828);
+    			add_location(span4, file$7, 216, 12, 5848);
     			attr_dev(div6, "class", "item svelte-bpsveq");
-    			add_location(div6, file$7, 213, 10, 5673);
+    			add_location(div6, file$7, 213, 10, 5693);
     			attr_dev(label4, "for", "");
     			attr_dev(label4, "class", "svelte-bpsveq");
-    			add_location(label4, file$7, 220, 12, 5976);
-    			add_location(span5, file$7, 221, 12, 6020);
+    			add_location(label4, file$7, 220, 12, 5996);
+    			add_location(span5, file$7, 221, 12, 6040);
     			attr_dev(div7, "class", "item svelte-bpsveq");
-    			add_location(div7, file$7, 219, 10, 5944);
+    			add_location(div7, file$7, 219, 10, 5964);
     			attr_dev(label5, "for", "");
     			attr_dev(label5, "class", "svelte-bpsveq");
-    			add_location(label5, file$7, 224, 12, 6127);
-    			add_location(span6, file$7, 225, 12, 6174);
+    			add_location(label5, file$7, 224, 12, 6147);
+    			add_location(span6, file$7, 225, 12, 6194);
     			attr_dev(div8, "class", "item svelte-bpsveq");
-    			add_location(div8, file$7, 223, 10, 6095);
+    			add_location(div8, file$7, 223, 10, 6115);
     			attr_dev(div9, "class", "info svelte-bpsveq");
-    			add_location(div9, file$7, 212, 8, 5643);
-    			add_location(div10, file$7, 193, 6, 4970);
+    			add_location(div9, file$7, 212, 8, 5663);
+    			add_location(div10, file$7, 193, 6, 4990);
     			attr_dev(div11, "id", "data");
     			attr_dev(div11, "class", "svelte-bpsveq");
-    			add_location(div11, file$7, 191, 4, 4908);
+    			add_location(div11, file$7, 191, 4, 4928);
     		},
     		m: function mount(target, anchor) {
     			if (if_block) if_block.m(target, anchor);
@@ -33001,10 +33001,10 @@ var app = (function () {
     			h1 = element("h1");
     			h1.textContent = "Loading";
     			attr_dev(h1, "class", "svelte-bpsveq");
-    			add_location(h1, file$7, 175, 6, 4496);
+    			add_location(h1, file$7, 175, 6, 4516);
     			attr_dev(div, "id", "loading");
     			attr_dev(div, "class", "svelte-bpsveq");
-    			add_location(div, file$7, 174, 4, 4470);
+    			add_location(div, file$7, 174, 4, 4490);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -33038,7 +33038,7 @@ var app = (function () {
     			h3 = element("h3");
     			h3.textContent = "could not find what you are looking for";
     			attr_dev(h3, "class", "error svelte-bpsveq");
-    			add_location(h3, file$7, 179, 6, 4568);
+    			add_location(h3, file$7, 179, 6, 4588);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -33081,7 +33081,7 @@ var app = (function () {
     			if_block.c();
     			attr_dev(div, "id", "widget");
     			attr_dev(div, "class", "svelte-bpsveq");
-    			add_location(div, file$7, 172, 0, 4430);
+    			add_location(div, file$7, 172, 0, 4450);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33213,7 +33213,7 @@ var app = (function () {
 
     	function getCurrent(city) {
     		return __awaiter(this, void 0, void 0, function* () {
-    			const data = yield axios$1.get(`/weather/current/${city}`);
+    			const data = yield axios$1.get(`/weather/current/${encodeURIComponent(city)}`);
     			return data.data;
     		});
     	}
