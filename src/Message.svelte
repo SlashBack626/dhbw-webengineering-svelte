@@ -7,6 +7,9 @@
 <style>
   .msg {
     overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    /* align-items: flex-end; */
     max-width: 80%;
     flex-shrink: 0;
   }
@@ -39,6 +42,11 @@
   }
   span {
     margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .sent span {
+    align-self: flex-end;
   }
 </style>
 

@@ -116,7 +116,7 @@
   {/key}
   <div id="settings">
     <label for="Username">Username</label>
-    <input type="text" id="Username" bind:value={username} />
+    <input type="text" id="Username" bind:value={username} maxlength="20" />
     <!-- <label for="Group">Group</label>
     <input type="text" id="Group" bind:value={group} />
     <button>Apply</button> -->

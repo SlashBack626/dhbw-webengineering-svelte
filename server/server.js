@@ -15,22 +15,25 @@ app.use(express_1.default.static("public"));
 app.get("/wikisearch/:search", async (req, res) => {
     console.log(req.params.search);
     const search = req.params.search;
-    const wiki = await axios_1.default.get(`https://de.wikipedia.org/w/api.php?action=query&generator=prefixsearch&format=json&gpslimit=4&prop=description|extracts&exintro=1&explaintext=1&exsentences=3&redirects=1&gpssearch=${search}`);
-    // res.writeHead(wiki.status, wiki.statusText);
-    res.status(wiki.status);
-    if (wiki.status === 200) {
-        const results = [];
-        for (const page in wiki.data.query.pages) {
-            if (Object.prototype.hasOwnProperty.call(wiki.data.query.pages, page)) {
-                const element = wiki.data.query.pages[page];
-                results.push(element);
+    try {
+        const wiki = await axios_1.default.get(`https://de.wikipedia.org/w/api.php?action=query&generator=prefixsearch&format=json&gpslimit=4&prop=description|extracts&exintro=1&explaintext=1&exsentences=3&redirects=1&gpssearch=${search}`);
+        // res.writeHead(wiki.status, wiki.statusText);
+        res.status(wiki.status);
+        if (wiki.status === 200) {
+            const results = [];
+            for (const page in wiki.data.query.pages) {
+                if (Object.prototype.hasOwnProperty.call(wiki.data.query.pages, page)) {
+                    const element = wiki.data.query.pages[page];
+                    results.push(element);
+                }
             }
+            res.send({ results: results });
         }
-        res.send({ results: results });
-        return;
     }
-    else
-        res.send();
+    catch (error) {
+        console.log(error);
+        res.sendStatus(400);
+    }
 });
 app.get("/weather/ip", async (req, res) => {
     console.log(req.ip);

@@ -1,17 +1,24 @@
 <script lang="ts">
   import axios from "axios";
   import type { WikiSearch, WikiSearchResultPage } from "./Interfaces";
-  let searchText: string;
+  let searchText: string = "";
   let results: WikiSearchResultPage[] = null;
+  let init: boolean = true;
   async function search() {
     if (searchText.length === 0) return;
-    let res = await axios.get<WikiSearch>(
-      `/wikisearch/${encodeURIComponent(searchText)}`
-    );
-    res.data.results.forEach((page) => {
-      console.log(page.title);
-    });
-    results = res.data.results;
+    init = false;
+    try {
+      let res = await axios.get<WikiSearch>(
+        `/wikisearch/${encodeURIComponent(searchText)}`
+      );
+      res.data.results.forEach((page) => {
+        console.log(page.title);
+      });
+      results = res.data.results;
+    } catch (error) {
+      console.log("no results found");
+      results = null;
+    }
   }
 </script>
 
@@ -64,6 +71,10 @@
   a:visited {
     color: lightgrey;
   }
+
+  #error {
+    display: block;
+  }
 </style>
 
 <div id="popup">
@@ -94,6 +105,8 @@
           </tr>
         {/each}
       </table>
+    {:else if !init}
+      <span id="error">Could not find what you are looking for!</span>
     {/if}
   </div>
 </div>
